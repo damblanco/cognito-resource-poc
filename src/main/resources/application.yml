@@ -6,5 +6,5 @@ endpoints:
 cognito:
   client: "7bn0bcd3s61aob1qpqb4e7sdh8"    # cognito client id
   secret: "1kv6o7j5u561qiu258v5907q1u8in3pv10k06fj1ij4vsn9dkt51"     # cognito client secret
-  callback: https://facebook.com  # valid callback url set in cognito
+  callback: http://localhost:8080/auth/token  # valid callback url set in cognito
   keys:   https://cognito-idp.us-east-1.amazonaws.com/us-east-1_Qa9A6gY0T/.well-known/jwks.json # url for cognito jwt keys
