@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     @Autowired
-    AuthService authService;
+    private AuthService authService;
 
     /**
      * Get user's token claims

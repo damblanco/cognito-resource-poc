@@ -34,12 +34,12 @@ public class AuthService {
     private String callbackUrl;
 
     @Autowired
-    RestTemplate restTemplate;
+    private RestTemplate restTemplate;
 
     /**
      * Get token with authorization code
      */
-    public CognitoJWT getToken(String code) {
+    public CognitoJWT getToken(final String code) {
         try {
             ResponseEntity<CognitoJWT> response = restTemplate.exchange(tokenUrl, HttpMethod.POST, buildAuthorizationRequest(clientId, clientSecret, code, callbackUrl), CognitoJWT.class);
             return response.getBody();

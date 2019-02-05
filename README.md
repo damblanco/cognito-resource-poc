@@ -44,6 +44,10 @@ mvn spring-boot:run
 
 * cognito.callback : valid callback url set in cognito (on this POC it will automatically redirect to the /auth/token endpoint)
 
+* cognito.region : Cognito's aws region
+
+* cognito.userPoolId : Cognito's User Pool Id
+
 * cognito.keys : url for cognito jwt keys (format: https://cognito-idp.{region}.amazonaws.com/{userPoolId}/.well-known/jwks.json )
 
 ## Usage

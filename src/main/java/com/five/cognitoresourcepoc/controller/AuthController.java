@@ -20,7 +20,7 @@ public class AuthController {
     private String authorizeUrl;
 
     @Autowired
-    AuthService authService;
+    private AuthService authService;
 
     /**
      * Redirect user to correct url for authorization code

@@ -8,6 +8,7 @@ import com.nimbusds.jose.proc.SecurityContext;
 import com.nimbusds.jose.util.DefaultResourceRetriever;
 import com.nimbusds.jwt.proc.ConfigurableJWTProcessor;
 import com.nimbusds.jwt.proc.DefaultJWTProcessor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,23 +17,24 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 @Configuration
+@Slf4j
 public class JWTProcessorConfig {
 
     @Value("${cognito.keys}")
     private String keySource;
 
     @Bean
-    public ConfigurableJWTProcessor configurableJWTProcessor(){
+    public ConfigurableJWTProcessor configurableJWTProcessor() {
         DefaultResourceRetriever resourceRetriever = new DefaultResourceRetriever(5000, 5000);
         URL jwkSetURL = null;
         try {
             jwkSetURL = new URL(keySource);
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         }
 
-        JWKSource<SecurityContext> keySource  = new RemoteJWKSet(jwkSetURL, resourceRetriever);
-        ConfigurableJWTProcessor<SecurityContext> jwtProcessor  = new DefaultJWTProcessor();
+        JWKSource<SecurityContext> keySource = new RemoteJWKSet(jwkSetURL, resourceRetriever);
+        ConfigurableJWTProcessor<SecurityContext> jwtProcessor = new DefaultJWTProcessor();
         JWSVerificationKeySelector keySelector = new JWSVerificationKeySelector(JWSAlgorithm.RS256, keySource);
         jwtProcessor.setJWSKeySelector(keySelector);
         return jwtProcessor;

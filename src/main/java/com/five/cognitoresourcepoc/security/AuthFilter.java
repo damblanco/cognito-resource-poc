@@ -1,5 +1,7 @@
 package com.five.cognitoresourcepoc.security;
 
+import com.nimbusds.jose.JOSEException;
+import com.nimbusds.jose.proc.BadJOSEException;
 import com.nimbusds.jose.proc.SecurityContext;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.proc.ConfigurableJWTProcessor;
@@ -20,9 +22,11 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.Collections;
 import java.util.Optional;
 
+import static com.five.cognitoresourcepoc.utils.AuthUtils.AUTHORIZATION_HEADER_PARAM_KEY;
 import static com.five.cognitoresourcepoc.utils.AuthUtils.USER_ROLE;
 import static java.util.Objects.isNull;
 
@@ -31,7 +35,6 @@ import static java.util.Objects.isNull;
 @Order(1)
 public class AuthFilter extends GenericFilterBean {
 
-    private static final String AUTH_HEADER = "Authorization";
     private static final String AUTH_HEADER_PREFIX_VALUE = "Bearer ";
 
     @Autowired
@@ -41,7 +44,7 @@ public class AuthFilter extends GenericFilterBean {
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain filterChain) throws IOException, ServletException {
         try {
             HttpServletRequest request = (HttpServletRequest) req;
-            String token = extractToken(request.getHeader(AUTH_HEADER));
+            String token = extractToken(request.getHeader(AUTHORIZATION_HEADER_PARAM_KEY));
             CognitoAuthenticationToken authentication = extractAuthentication(token);
             SecurityContextHolder.getContext().setAuthentication(authentication);
             filterChain.doFilter(req, res);
@@ -74,7 +77,7 @@ public class AuthFilter extends GenericFilterBean {
         try {
             JWTClaimsSet claims = processor.process(token, null);
             return new CognitoAuthenticationToken(Collections.singletonList(new SimpleGrantedAuthority(USER_ROLE)), token, claims);
-        } catch (Exception e) {
+        } catch (ParseException | BadJOSEException | JOSEException e) {
             throw new AccessDeniedException(Optional.ofNullable(e).map(Exception::getMessage).orElse("No Message"));
         }
     }

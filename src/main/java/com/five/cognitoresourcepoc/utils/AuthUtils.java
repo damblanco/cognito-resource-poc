@@ -19,7 +19,7 @@ public class AuthUtils {
     public static final String USER_ROLE = "USER_ROLE";
 
 
-    private static final String AUTHORIZATION_HEADER_PARAM_KEY = "Authorization";
+    public static final String AUTHORIZATION_HEADER_PARAM_KEY = "Authorization";
     private static final String CONTENT_TYPE_HEADER_PARAM_KEY = "Content-Type";
     private static final String GRANT_TYPE_PARAM_KEY = "grant_type";
     private static final String GRANT_TYPE_PARAM_VALUE = "authorization_code";
