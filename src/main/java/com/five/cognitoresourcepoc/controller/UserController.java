@@ -15,7 +15,7 @@ public class UserController {
     private AuthService authService;
 
     /**
-     * Get user's token claims
+     * Get user's token claims.
      */
     @GetMapping("/me")
     public TokenClaims getCurrentUser() {

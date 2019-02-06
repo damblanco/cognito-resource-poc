@@ -37,13 +37,13 @@ public class AuthUtils {
 
 
     /**
-     * Build oauth/token request
+     * Build oauth/token request.
      *
-     * @param clientId
-     * @param clientSecret
-     * @param code         obtained from login redirect
-     * @param callbackUrl
-     * @return {@link HttpEntity<MultiValueMap<String, String>>}
+     * @param clientId     authorization provider client id.
+     * @param clientSecret authorization provider secret.
+     * @param code         obtained from login redirect.
+     * @param callbackUrl  to redirect after login.
+     * @return {@link HttpEntity}
      */
     public static HttpEntity<MultiValueMap<String, String>> buildAuthorizationRequest(String clientId, String clientSecret, String code, String callbackUrl) {
         byte[] auth = Base64.encodeBase64(clientId.concat(":").concat(clientSecret).getBytes());
@@ -57,13 +57,13 @@ public class AuthUtils {
 
 
     /**
-     * Build oauth/token body request
+     * Build oauth/token body request.
      *
-     * @param clientId
-     * @param clientSecret
-     * @param code         obtained from login redirect
-     * @param callbackUrl
-     * @return {@link MultiValueMap<String, String>}
+     * @param clientId     authorization provider client id.
+     * @param clientSecret authorization provider secret.
+     * @param code         obtained from login redirect.
+     * @param callbackUrl  to redirect after login.
+     * @return {@link MultiValueMap}
      */
     private static MultiValueMap<String, String> buildAuthorizationRequestBody(String clientId, String clientSecret, String code, String callbackUrl) {
 
@@ -78,7 +78,7 @@ public class AuthUtils {
     }
 
     /**
-     * Build {@link TokenClaims} object from {@link JWTClaimsSet} values
+     * Build {@link TokenClaims} object from {@link JWTClaimsSet} values.
      *
      * @param {@link JWTClaimsSet} set of jwt token claims
      * @return {@link TokenClaims}

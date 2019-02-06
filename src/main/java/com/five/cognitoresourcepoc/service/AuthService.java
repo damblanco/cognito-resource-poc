@@ -37,7 +37,7 @@ public class AuthService {
     private RestTemplate restTemplate;
 
     /**
-     * Get token with authorization code
+     * Get token with authorization code.
      */
     public CognitoJWT getToken(final String code) {
         try {
@@ -50,7 +50,7 @@ public class AuthService {
 
 
     /**
-     * Get User Token Claims
+     * Get User Token Claims.
      */
     public TokenClaims getClaims() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

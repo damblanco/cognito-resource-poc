@@ -57,7 +57,7 @@ public class AuthFilter extends GenericFilterBean {
     }
 
     /**
-     * Extract token from header
+     * Extract token from header.
      */
     private String extractToken(String header) {
         return Optional.ofNullable(header)
@@ -68,12 +68,12 @@ public class AuthFilter extends GenericFilterBean {
     }
 
     /**
-     * Extract authentication details from token
+     * Extract authentication details from token.
      */
     private CognitoAuthenticationToken extractAuthentication(String token) throws AccessDeniedException {
-        if (isNull(token))
+        if (isNull(token)) {
             return null;
-
+        }
         try {
             JWTClaimsSet claims = processor.process(token, null);
             return new CognitoAuthenticationToken(Collections.singletonList(new SimpleGrantedAuthority(USER_ROLE)), token, claims);

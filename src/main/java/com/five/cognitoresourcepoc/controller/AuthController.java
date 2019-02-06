@@ -23,7 +23,7 @@ public class AuthController {
     private AuthService authService;
 
     /**
-     * Redirect user to correct url for authorization code
+     * Redirect user to correct url for authorization code.
      */
     @GetMapping("/login")
     public ResponseEntity<Object> login() {
@@ -34,7 +34,7 @@ public class AuthController {
     }
 
     /**
-     * Get aws tokens with authorization code
+     * Get aws tokens with authorization code.
      */
     @GetMapping("/token")
     public CognitoJWT getToken(@RequestParam("code") String code) {
