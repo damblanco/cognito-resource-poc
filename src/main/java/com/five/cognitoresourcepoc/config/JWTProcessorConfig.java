@@ -24,13 +24,14 @@ public class JWTProcessorConfig {
     private String keySource;
 
     @Bean
-    public ConfigurableJWTProcessor configurableJWTProcessor() {
+    public ConfigurableJWTProcessor configurableJWTProcessor() throws MalformedURLException {
         DefaultResourceRetriever resourceRetriever = new DefaultResourceRetriever(5000, 5000);
         URL jwkSetURL = null;
         try {
             jwkSetURL = new URL(keySource);
         } catch (MalformedURLException e) {
             log.error(e.getMessage());
+            throw e;
         }
 
         JWKSource<SecurityContext> keySource = new RemoteJWKSet(jwkSetURL, resourceRetriever);

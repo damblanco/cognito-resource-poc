@@ -44,6 +44,7 @@ public class AuthService {
             ResponseEntity<CognitoJWT> response = restTemplate.exchange(tokenUrl, HttpMethod.POST, buildAuthorizationRequest(clientId, clientSecret, code, callbackUrl), CognitoJWT.class);
             return response.getBody();
         } catch (HttpClientErrorException e) {
+            log.error(e.getMessage());
             throw new HttpServerErrorException(e.getStatusCode(), e.getMessage());
         }
     }
@@ -58,6 +59,7 @@ public class AuthService {
         try {
             return buildTokenClaims(details);
         } catch (ParseException e) {
+            log.error(e.getMessage());
             throw new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Error");
         }
     }
