@@ -1,4 +1,4 @@
-package com.five.cognitoresourcepoc.config;
+package com.damian.cognitoresourcepoc.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

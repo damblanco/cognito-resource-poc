@@ -1,4 +1,4 @@
-package com.five.cognitoresourcepoc.security;
+package com.damian.cognitoresourcepoc.security;
 
 import com.nimbusds.jwt.JWTClaimsSet;
 import org.springframework.security.authentication.AbstractAuthenticationToken;

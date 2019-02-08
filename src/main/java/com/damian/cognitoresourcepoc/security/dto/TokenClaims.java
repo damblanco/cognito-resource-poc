@@ -1,8 +1,7 @@
-package com.five.cognitoresourcepoc.security.dto;
+package com.damian.cognitoresourcepoc.security.dto;
 
 import lombok.Data;
 import lombok.experimental.Builder;
-
 
 import java.util.Date;
 import java.util.List;
@@ -12,7 +11,7 @@ import java.util.List;
 public class TokenClaims {
 
     private String uuid;
-    private long authTime;
+    private Long authTime;
     private Date issued;
     private Date expire;
     private String cognitoUserName;

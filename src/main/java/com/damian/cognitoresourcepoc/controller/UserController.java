@@ -1,7 +1,7 @@
-package com.five.cognitoresourcepoc.controller;
+package com.damian.cognitoresourcepoc.controller;
 
-import com.five.cognitoresourcepoc.security.dto.TokenClaims;
-import com.five.cognitoresourcepoc.service.AuthService;
+import com.damian.cognitoresourcepoc.security.dto.TokenClaims;
+import com.damian.cognitoresourcepoc.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

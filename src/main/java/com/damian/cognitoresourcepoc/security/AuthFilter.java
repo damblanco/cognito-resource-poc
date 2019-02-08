@@ -1,4 +1,4 @@
-package com.five.cognitoresourcepoc.security;
+package com.damian.cognitoresourcepoc.security;
 
 import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jose.proc.BadJOSEException;
@@ -26,8 +26,8 @@ import java.text.ParseException;
 import java.util.Collections;
 import java.util.Optional;
 
-import static com.five.cognitoresourcepoc.utils.AuthUtils.AUTHORIZATION_HEADER_PARAM_KEY;
-import static com.five.cognitoresourcepoc.utils.AuthUtils.USER_ROLE;
+import static com.damian.cognitoresourcepoc.security.enums.SecurityRole.USER_ROLE;
+import static com.damian.cognitoresourcepoc.security.utils.AuthUtils.AUTHORIZATION_HEADER_PARAM_KEY;
 import static java.util.Objects.isNull;
 
 @Slf4j
@@ -59,7 +59,7 @@ public class AuthFilter extends GenericFilterBean {
     /**
      * Extract token from header.
      */
-    private String extractToken(String header) {
+    private String extractToken(final String header) {
         return Optional.ofNullable(header)
                 .map(h -> h.split(AUTH_HEADER_PREFIX_VALUE))
                 .map(splitAuthHeader -> splitAuthHeader.length > 1 ? splitAuthHeader[1] : null)
@@ -70,13 +70,13 @@ public class AuthFilter extends GenericFilterBean {
     /**
      * Extract authentication details from token.
      */
-    private CognitoAuthenticationToken extractAuthentication(String token) throws AccessDeniedException {
+    private CognitoAuthenticationToken extractAuthentication(final String token) throws AccessDeniedException {
         if (isNull(token)) {
             return null;
         }
         try {
             JWTClaimsSet claims = processor.process(token, null);
-            return new CognitoAuthenticationToken(Collections.singletonList(new SimpleGrantedAuthority(USER_ROLE)), token, claims);
+            return new CognitoAuthenticationToken(Collections.singletonList(new SimpleGrantedAuthority(USER_ROLE.getDescription())), token, claims);
         } catch (ParseException | BadJOSEException | JOSEException e) {
             throw new AccessDeniedException(Optional.ofNullable(e).map(Exception::getMessage).orElse("No Message"));
         }

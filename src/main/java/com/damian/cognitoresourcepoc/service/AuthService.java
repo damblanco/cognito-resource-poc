@@ -1,7 +1,8 @@
-package com.five.cognitoresourcepoc.service;
+package com.damian.cognitoresourcepoc.service;
 
-import com.five.cognitoresourcepoc.security.dto.CognitoJWT;
-import com.five.cognitoresourcepoc.security.dto.TokenClaims;
+import com.damian.cognitoresourcepoc.security.dto.TokenClaims;
+import com.damian.cognitoresourcepoc.security.utils.AuthUtils;
+import com.damian.cognitoresourcepoc.security.dto.CognitoJWT;
 import com.nimbusds.jwt.JWTClaimsSet;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +18,6 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.text.ParseException;
-
-import static com.five.cognitoresourcepoc.utils.AuthUtils.buildAuthorizationRequest;
-import static com.five.cognitoresourcepoc.utils.AuthUtils.buildTokenClaims;
 
 @Service
 @Slf4j
@@ -41,7 +39,7 @@ public class AuthService {
      */
     public CognitoJWT getToken(final String code) {
         try {
-            ResponseEntity<CognitoJWT> response = restTemplate.exchange(tokenUrl, HttpMethod.POST, buildAuthorizationRequest(clientId, clientSecret, code, callbackUrl), CognitoJWT.class);
+            ResponseEntity<CognitoJWT> response = restTemplate.exchange(tokenUrl, HttpMethod.POST, AuthUtils.buildAuthorizationRequest(clientId, clientSecret, code, callbackUrl), CognitoJWT.class);
             return response.getBody();
         } catch (HttpClientErrorException e) {
             log.error(e.getMessage());
@@ -57,7 +55,7 @@ public class AuthService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         JWTClaimsSet details = (JWTClaimsSet) (authentication.getDetails());
         try {
-            return buildTokenClaims(details);
+            return AuthUtils.buildTokenClaims(details);
         } catch (ParseException e) {
             log.error(e.getMessage());
             throw new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Error");

@@ -7,7 +7,7 @@
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.1.2.RELEASE</version>
     </parent>
-    <groupId>com.five</groupId>
+    <groupId>com.damian</groupId>
     <artifactId>cognito-resource-poc</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>cognito-resource-poc</name>
@@ -54,6 +54,13 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>spring-mock-mvc</artifactId>
+            <version>3.0.6</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -75,7 +82,6 @@
                             <encoding>UTF-8</encoding>
                             <consoleOutput>true</consoleOutput>
                             <failsOnError>true</failsOnError>
-                            <linkXRef>false</linkXRef>
                         </configuration>
                         <goals>
                             <goal>check</goal>

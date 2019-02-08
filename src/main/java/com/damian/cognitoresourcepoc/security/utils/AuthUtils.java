@@ -1,6 +1,6 @@
-package com.five.cognitoresourcepoc.utils;
+package com.damian.cognitoresourcepoc.security.utils;
 
-import com.five.cognitoresourcepoc.security.dto.TokenClaims;
+import com.damian.cognitoresourcepoc.security.dto.TokenClaims;
 import com.nimbusds.jwt.JWTClaimsSet;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.http.HttpEntity;
@@ -11,13 +11,8 @@ import org.springframework.util.MultiValueMap;
 
 import java.text.ParseException;
 import java.util.Collections;
-import java.util.Date;
 
-public class AuthUtils {
-
-    //User Logged Role
-    public static final String USER_ROLE = "USER_ROLE";
-
+public final class AuthUtils {
 
     public static final String AUTHORIZATION_HEADER_PARAM_KEY = "Authorization";
     private static final String CONTENT_TYPE_HEADER_PARAM_KEY = "Content-Type";
@@ -35,6 +30,9 @@ public class AuthUtils {
     private static final String COGNITO_ROLES_TOKEN_CLAIM = "cognito:roles";
     private static final String EMAIL_TOKEN_CLAIM = "email";
 
+    private AuthUtils() {
+    }
+
 
     /**
      * Build oauth/token request.
@@ -45,7 +43,7 @@ public class AuthUtils {
      * @param callbackUrl  to redirect after login.
      * @return {@link HttpEntity}
      */
-    public static HttpEntity<MultiValueMap<String, String>> buildAuthorizationRequest(String clientId, String clientSecret, String code, String callbackUrl) {
+    public static HttpEntity<MultiValueMap<String, String>> buildAuthorizationRequest(final String clientId, final String clientSecret, final String code, final String callbackUrl) {
         byte[] auth = Base64.encodeBase64(clientId.concat(":").concat(clientSecret).getBytes());
 
         MultiValueMap<String, String> headers = new HttpHeaders();
@@ -65,7 +63,7 @@ public class AuthUtils {
      * @param callbackUrl  to redirect after login.
      * @return {@link MultiValueMap}
      */
-    private static MultiValueMap<String, String> buildAuthorizationRequestBody(String clientId, String clientSecret, String code, String callbackUrl) {
+    private static MultiValueMap<String, String> buildAuthorizationRequestBody(final String clientId, final String clientSecret, final String code, final String callbackUrl) {
 
         MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
         body.add(GRANT_TYPE_PARAM_KEY, GRANT_TYPE_PARAM_VALUE);
@@ -83,13 +81,13 @@ public class AuthUtils {
      * @param {@link JWTClaimsSet} set of jwt token claims
      * @return {@link TokenClaims}
      */
-    public static TokenClaims buildTokenClaims(JWTClaimsSet details) throws ParseException {
+    public static TokenClaims buildTokenClaims(final JWTClaimsSet details) throws ParseException {
         return TokenClaims
                 .builder()
-                .uuid(details.getStringClaim(SUB_TOKEN_CLAIM))
-                .authTime((Long) details.getClaim(AUTH_TIME_TOKEN_CLAIM))
-                .issued((Date) details.getClaim(IAT_TOKEN_CLAIM))
-                .expire((Date) details.getClaim(EXP_TOKEN_CLAIM))
+                .uuid(details.getSubject())
+                .authTime(details.getLongClaim(AUTH_TIME_TOKEN_CLAIM))
+                .issued(details.getIssueTime())
+                .expire(details.getExpirationTime())
                 .cognitoUserName(details.getStringClaim(COGNITO_USERNAME_TOKEN_CLAIM))
                 .cognitoRoles(details.getStringListClaim(COGNITO_ROLES_TOKEN_CLAIM))
                 .email(details.getStringClaim(EMAIL_TOKEN_CLAIM))

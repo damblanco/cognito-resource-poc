@@ -1,4 +1,4 @@
-package com.five.cognitoresourcepoc.security.dto;
+package com.damian.cognitoresourcepoc.security.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

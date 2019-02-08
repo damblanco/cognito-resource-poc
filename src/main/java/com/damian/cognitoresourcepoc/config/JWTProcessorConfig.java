@@ -1,4 +1,4 @@
-package com.five.cognitoresourcepoc.config;
+package com.damian.cognitoresourcepoc.config;
 
 import com.nimbusds.jose.JWSAlgorithm;
 import com.nimbusds.jose.jwk.source.JWKSource;
