@@ -25,7 +25,7 @@ mvn spring-boot:run
 
 * /auth/login : Endpoint  that performs a redirection to the login form of cognito.
 
-* /auth/token : Endpoint that given a code as request param, makes an [authorization request](https://www.oauth.com/oauth2-servers/authorization/the-authorization-request/) and return the id_token, access_token and refresh_token.
+* /auth/token : Endpoint that given a code as request param, makes an [authorization request](https://auth0.com/docs/api-auth/tutorials/authorization-code-grant) and return the id_token, access_token and refresh_token.
 
 * /user/me : Secured endpoint to get the JSON Web Token claims.
 
