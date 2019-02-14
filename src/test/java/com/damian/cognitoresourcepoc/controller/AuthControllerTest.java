@@ -1,18 +1,10 @@
 package com.damian.cognitoresourcepoc.controller;
 
 import com.damian.cognitoresourcepoc.service.AuthService;
-import io.restassured.module.mockmvc.specification.MockMvcRequestSpecification;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureWebMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
 
-import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -22,8 +14,8 @@ import static org.mockito.Mockito.verify;
 @SpringBootTest(classes = AuthController.class)
 public class AuthControllerTest extends AbstracControllerTest {
 
-    private final static String CODE_PARAM = "code";
-    private final static String CODE_VALUE = "codeValue";
+    private static final String CODE_PARAM = "code";
+    private static final String CODE_VALUE = "codeValue";
 
     @MockBean
     private AuthService authService;

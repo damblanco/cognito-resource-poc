@@ -72,7 +72,7 @@ public class AuthServiceTest {
     }
 
     /**
-     * Test authorization request
+     * Test authorization request.
      */
     @Test
     public void testAuthorizationRequest() {
@@ -115,7 +115,7 @@ public class AuthServiceTest {
     }
 
     /**
-     * Test get Token Claims
+     * Test get Token Claims.
      */
     @Test
     public void testGetClaims() {
@@ -142,7 +142,7 @@ public class AuthServiceTest {
     }
 
     /**
-     * Test get Token Claims should throw {@link HttpServerErrorException} due to {@link ParseException}
+     * Test get Token Claims should throw {@link HttpServerErrorException} due to {@link ParseException}.
      */
     @Test(expected = HttpServerErrorException.class)
     public void testGetClaimsShouldThrowHttpServerErrorException() {

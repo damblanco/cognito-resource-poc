@@ -12,7 +12,7 @@ import static org.mockito.Mockito.verify;
  * Unit tests for {@link UserController}.
  */
 @SpringBootTest(classes = UserController.class)
-public class UserControllerTest extends AbstracControllerTest{
+public class UserControllerTest extends AbstracControllerTest {
 
     @MockBean
     private AuthService authService;

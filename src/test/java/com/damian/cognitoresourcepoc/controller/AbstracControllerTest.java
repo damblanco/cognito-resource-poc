@@ -23,8 +23,8 @@ public abstract class AbstracControllerTest {
 
 
     protected MockMvcRequestSpecification givenController() {
-        return given().
-                mockMvc(mockMvc);
+        return given()
+                .mockMvc(mockMvc);
     }
 
 }
